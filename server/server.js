@@ -6,7 +6,7 @@ import path from 'path'
 import fs from 'fs';
 
 
-const OPENAI_API_KEY = "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"
+const OPENAI_API_KEY = "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"
 
 const configuration = new Configuration({
     apiKey: OPENAI_API_KEY,
