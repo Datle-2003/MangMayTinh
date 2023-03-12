@@ -5,8 +5,7 @@ import { Configuration, OpenAIApi } from 'openai'
 import path from 'path'
 import fs from 'fs';
 
-
-const OPENAI_API_KEY = "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"
+const OPENAI_API_KEY = "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"
 
 const configuration = new Configuration({
     apiKey: OPENAI_API_KEY,
@@ -24,8 +23,6 @@ app.get('/', async (req, res) => {
     })
 })
 
-
-
 app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
@@ -34,9 +31,7 @@ app.post('/', async (req, res) => {
             prompt: `${prompt}`,
             temperature: 0,
             max_tokens: 300,
-            top_p: 1, 
-            frequency_penalty: 0.5, 
-            presence_penalty: 0,
+            top_p: 1,
         });
         res.status(200).send({
             bot: response.data.choices[0].text
