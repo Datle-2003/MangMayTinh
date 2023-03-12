@@ -1,6 +1,3 @@
-
-
-
 function displayMessage(requireMessage, responseMessage) {
   let data_req = document.createElement('div');
   let data_res = document.createElement('div');
@@ -29,14 +26,12 @@ function init() {
 }
 
 
-document.getElementById('reply').addEventListener("click", async (e) => {
-  e.preventDefault();
-  var req = document.getElementById('msg_send').value;
+
+async function getResponse(req) {
   if (req == undefined || req == "") {
     return;
   } else {
-    var res = "";
-    const response = await fetch('http://localhost:5000',
+    const response = await fetch('http://localhost:5000/',
       {
         method: 'POST',
         headers: {
@@ -46,21 +41,71 @@ document.getElementById('reply').addEventListener("click", async (e) => {
           prompt: `${req}`,
         })
       })
-      .then(data => data.json())
-      .then(data => {
-        res = data.bot.trim();
-      })
-      .catch(error => {
-        console.error(error);
-      })
 
-    displayMessage(req, res);
-    function scroll() {
-      var scrollMsg = document.getElementById('msg')
-      scrollMsg.scrollTop = scrollMsg.scrollHeight;
-    }
-    scroll();
+    const data = await response.json();
+    return data.bot.trim();
   }
+}
+
+document.getElementById('reply').addEventListener("click", async (e) => {
+  e.preventDefault();
+  var req = document.getElementById('msg_send').value;
+  const res = await getResponse(req);
+  displayMessage(req, res);
+  function scroll() {
+    var scrollMsg = document.getElementById('msg')
+    scrollMsg.scrollTop = scrollMsg.scrollHeight;
+  }
+  scroll();
+}
+);
+
+let startButton = document.getElementById("start-button");
+
+const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.continuous = false;
+recognition.interimResults = false;
+recognition.lang = "vi-VN";
+
+let text = ""
+
+startButton.addEventListener('click', function () {
+  recognition.start();
+  startButton.innerHTML = '<i class="fa fa-microphone" style="font-size:24px;color:red"></i>';
+  startButton.disabled = true;
+
+  setTimeout(async () => {
+    recognition.stop();
+    startButton.disabled = false;
+    startButton.innerHTML = '<i class="fa fa-microphone" style="font-size:24px"></i>';
+
+    recognition.onresult = function (event) {
+      const result = event.results[event.results.length - 1];
+      text = result[0].transcript.trim();
+      console.log(text);
+    }
+    const response = await getResponse(text);
+
+    displayMessage(text, response);
+    text_to_speech(response);
+  }, 5000)
 });
 
+
+let text_to_speech = function (text) {
+  let speechSynthesis = window.speechSynthesis;
+  let utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "vi-VN";
+  let voices = speechSynthesis.getVoices();
+  let vietnameseVoices = voices.filter(function (voice) {
+    return voice.lang === 'vi-VN';
+  });
+  if (vietnameseVoices.length > 0) {
+    utterance.voice = vietnameseVoices[0];
+  }
+  utterance.rate = 1.0;
+  speechSynthesis.speak(utterance);
+}
 

@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>ChatBot</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 </head>
 
 <body onload="init()">
@@ -20,11 +21,10 @@
 
     <div class="input">
       <input type="text" id="msg_send" placeholder="New Message"> <button class="send" id="reply">Send <i
-          class="fas fa-paper-plane"></i></button>
+          class="fa fa-send"></i></button>
     </div>
-    <div id="button-container">
-      <button id="start-button">Recording</button>
-      <button id="end-button">Stop</button>
+    <div class="input" id="button-container">
+      <button id="start-button"><i class="fa fa-microphone" style="font-size:24px"></i></button>
     </div>
 
   </div>

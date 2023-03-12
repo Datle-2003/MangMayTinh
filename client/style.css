@@ -49,7 +49,6 @@ body {
 .send {
   outline: none;
   font-size: 20px;
-  border: none;
   background: #1c1f46;
   border-radius: 32px;
   color: #eee;
@@ -130,22 +129,20 @@ h3 {
 
 #button-container {
   position: fixed;
-  top: 87%;
-  left: 68%;
+  top: 92.5%;
+  left: 72.5%;
   transform: translate(-50%, -50%);
 }
 
-#start-button,
-#end-button {
+#start-button{
   border-radius: 20%;
   display: inline-block;
   margin: 1px;
-  outline: none;
+  outline: #1c1f46;
   font-size: 20px;
-  border: none;
   background: #1c1f46;
-  border-radius: 32px;
+  border-radius: 32px ;
   color: #eee;
   transition-duration: 0.2s;
-  width: 100px;
+  width: 30px;
 }
