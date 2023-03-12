@@ -1,15 +1,12 @@
 import express from 'express'
-import * as dotenv from 'dotenv'
+import dotenv from 'dotenv'
 import cors from 'cors'
 import { Configuration, OpenAIApi } from 'openai'
-import path from 'path'
-import fs from 'fs';
 
 dotenv.config()
 
-
 const configuration = new Configuration({
-    apiKey: process.env.OPEN_API_KEY,
+    apiKey: process.env.API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -39,7 +36,7 @@ app.post('/', async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error)
+        // console.error(error)
         res.status(500).send(error || 'Something went wrong');
     }
 })
