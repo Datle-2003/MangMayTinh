@@ -28,7 +28,7 @@ app.get('/', async (req, res) => {
 
 app.post('/', async (req, res) => {
     try {
-        
+        console.log(req.body.prompt);
         const prompt = req.body.prompt;
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -44,7 +44,7 @@ app.post('/', async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error)
+        //console.error(error)
         res.status(500).send(error || 'Something went wrong');
     }
 })
