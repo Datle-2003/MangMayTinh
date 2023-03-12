@@ -10,6 +10,7 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
+if (!openai) console.log("err")
 
 const app = express()
 app.use(cors())
