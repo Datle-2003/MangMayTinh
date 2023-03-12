@@ -1,3 +1,4 @@
+
 function displayMessage(requireMessage, responseMessage) {
   let data_req = document.createElement('div');
   let data_res = document.createElement('div');
@@ -60,6 +61,7 @@ document.getElementById('reply').addEventListener("click", async (e) => {
 }
 );
 
+
 let startButton = document.getElementById("start-button");
 
 const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
@@ -93,19 +95,7 @@ startButton.addEventListener('click', function () {
   }, 5000)
 });
 
-
-let text_to_speech = function (text) {
-  let speechSynthesis = window.speechSynthesis;
-  let utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "vi-VN";
-  let voices = speechSynthesis.getVoices();
-  let vietnameseVoices = voices.filter(function (voice) {
-    return voice.lang === 'vi-VN';
-  });
-  if (vietnameseVoices.length > 0) {
-    utterance.voice = vietnameseVoices[0];
-  }
-  utterance.rate = 1.0;
-  speechSynthesis.speak(utterance);
+function text_to_speech(Text) {
+  responsiveVoice.setDefaultVoice("Vietnamese Male");
+  responsiveVoice.speak(Text);
 }
-
