@@ -9,6 +9,10 @@ const configuration = new Configuration({
     apiKey: process.env.API_KEY,
 });
 
+if (process.env.API_KEY == undefined) {
+    console.log("ABVVV");
+}
+
 const openai = new OpenAIApi(configuration);
 if (!openai) console.log("err")
 
@@ -37,7 +41,7 @@ app.post('/', async (req, res) => {
         });
 
     } catch (error) {
-        // console.error(error)
+        console.error(error)
         res.status(500).send(error || 'Something went wrong');
     }
 })
