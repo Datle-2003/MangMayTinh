@@ -26,16 +26,17 @@ app.get('/', async (req, res) => {
 
 
 
-app.post('/app', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
+        console.log(req.body.prompt);
         const prompt = req.body.prompt;
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: `${prompt}`,
             temperature: 0,
             max_tokens: 300,
-            top_p: 1, // alternative to sampling with temperature, called nucleus sampling
-            frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+            top_p: 1, 
+            frequency_penalty: 0.5, 
             presence_penalty: 0,
         });
         res.status(200).send({
