@@ -63,7 +63,8 @@
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ prompt: `${req}`, })
+            body: JSON.stringify({
+               prompt: `${req}`, })
           })
         const data = await response.json();
         return data.bot.trim();
