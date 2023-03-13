@@ -9,12 +9,8 @@ const configuration = new Configuration({
     apiKey: process.env.API_KEY,
 });
 
-if (process.env.API_KEY == undefined) {
-    console.log("ABVVV");
-}
 
 const openai = new OpenAIApi(configuration);
-if (!openai) console.log("err")
 
 const app = express()
 app.use(cors())
