@@ -78,7 +78,9 @@
       e.preventDefault();
       var req = document.getElementById('msg_send').value;
       const res = await getResponse(req);
-      displayMessage(req, res);
+      if (res !== undefined) {
+        displayMessage(req, res);
+      }
 
       function scroll() {
         var scrollMsg = document.getElementById('msg')
@@ -117,7 +119,7 @@
         }
 
         const response = await getResponse(text);
-        if (response !== undefined ) {
+        if (response !== undefined) {
           displayMessage(text, response);
           text_to_speech(response);
         }
