@@ -48,12 +48,14 @@
       container2.appendChild(data_res);
       document.getElementById('msg_send').value = "";
     }
+
     function init() {
       let res_elm = document.createElement("div");
       res_elm.innerHTML = "Hello, how can I help you?";
       res_elm.setAttribute("class", "left");
       document.getElementById('msg').appendChild(res_elm);
     }
+
     async function getResponse(req) {
       if (req == undefined || req == "") {
         return;
@@ -113,6 +115,7 @@
           text = result[0].transcript.trim();
           console.log(text);
         }
+        
         const response = await getResponse(text);
 
         displayMessage(text, response);
