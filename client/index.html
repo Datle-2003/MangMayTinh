@@ -62,6 +62,7 @@
             text: `${responseMessage}`,
           })
         })
+        .then(res => res.json())
 
         document.getElementById('res_msg').innerText = data;
       })
