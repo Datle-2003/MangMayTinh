@@ -2,7 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import { Configuration, OpenAIApi } from 'openai'
-
+import { translate } from '@vitalets/google-translate-api';
 dotenv.config()
 
 const configuration = new Configuration({
@@ -38,6 +38,27 @@ app.post('/', async (req, res) => {
 
     } catch (error) {
         console.error(error)
+        res.status(500).send(error || 'Something went wrong');
+    }
+})
+
+
+app.get('/translate', async (req, res) => {
+    res.status(200).send({
+        message: 'Hello'
+    })
+})
+
+app.post('/translate', async (req, res) => {
+    try {
+        const text = req.body.text;
+        const { response } = await translate(text, { to: 'vi' });
+        res.status(200).send({
+            data: response
+        })
+    }
+    catch(error){
+        console.log(error)
         res.status(500).send(error || 'Something went wrong');
     }
 })
