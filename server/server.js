@@ -53,6 +53,7 @@ app.post('/translate', async (req, res) => {
     try {
         const text = req.body.text;
         const { response } = await translate(text, { to: 'vi' });
+        console.log(response)
         res.status(200).send({
             data: response
         })
