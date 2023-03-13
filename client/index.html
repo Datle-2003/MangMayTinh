@@ -46,27 +46,7 @@
       message.appendChild(container2);
       container1.appendChild(data_req);
       container2.appendChild(data_res);
-      let button = document.createElement('button');
-      button.innerHTML = '<i class="fa fa-language"></i>';
-      data_res.appendChild(button);
-      button.setAttribute("id", "translate")
       document.getElementById('msg_send').value = "";
-
-      document.getElementById('translate').addEventListener("click", async () => {
-        const data = await fetch('https://chatbot-fl2x.onrender.com/translate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            text: `${responseMessage}`,
-          })
-        })
-          .then(res => res.json())
-          .then(res => console.log(res))
-
-        document.getElementById('res_msg').innerText = data;
-      })
     }
 
 
@@ -82,7 +62,7 @@
       if (req == undefined || req == "") {
         return;
       } else {
-        const response = await fetch('https://chatbot-fl2x.onrender.com/', {
+        const response = await fetch('http://localhost:5000/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +84,6 @@
       if (res !== undefined) {
         displayMessage(req, res);
       }
-
       function scroll() {
         var scrollMsg = document.getElementById('msg')
         scrollMsg.scrollTop = scrollMsg.scrollHeight;
