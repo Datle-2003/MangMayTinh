@@ -87,7 +87,7 @@ body {
 
 #msg {
   overflow-y: scroll;
-  height: 88%;
+  height: 89%;
   padding: 0 12px;
   scroll-behavior: smooth;
 }
