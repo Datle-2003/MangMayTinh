@@ -14,7 +14,7 @@ body {
   overflow: hidden;
   display: grid;
   justify-content: center;
-  background-color: #7c9285;
+  background-color: #dbe9eb;
 }
 
 #main {
@@ -120,7 +120,7 @@ h3 {
 
 #button-container {
   position: fixed;
-  top: 91.5%;
+  top: 92.5%;
   left: 96%;
   transform: translate(-50%, -50%);
 }
