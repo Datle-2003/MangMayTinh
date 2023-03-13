@@ -115,11 +115,12 @@
           text = result[0].transcript.trim();
           console.log(text);
         }
-        
-        const response = await getResponse(text);
 
-        displayMessage(text, response);
-        text_to_speech(response);
+        const response = await getResponse(text);
+        if (response !== undefined ) {
+          displayMessage(text, response);
+          text_to_speech(response);
+        }
       }, 5000)
     });
 
