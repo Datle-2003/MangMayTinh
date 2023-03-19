@@ -35,7 +35,7 @@ async function getResponse(requireMessage) {
   if (requireMessage == undefined || requireMessage == "") {
     return;
   } else {
-    const response = await fetch("http://localhost:5000/", {
+    const response = await fetch("https://chatbot-fl2x.onrender.com//", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
