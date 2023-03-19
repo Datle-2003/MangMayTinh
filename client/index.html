@@ -35,22 +35,19 @@
         </div>
       </div>
     </div>
-    <script
-      src="https://code.responsivevoice.org/responsivevoice.js?key=nwE0myk1"
-    >
-        function init() {
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=nwE0myk1"></script>
+    <script>
+      function init() {
         let defaultMessage = document.createElement("div");
         defaultMessage.innerHTML = "Hello, how can I help you?";
         defaultMessage.setAttribute("class", "left");
         document.getElementById("messages").appendChild(defaultMessage);
-      };
+      }
 
       const messageInput = document.querySelector(".message-input");
       const messages = document.querySelector(".messages");
       const sendButton = document.querySelector(".send-button");
       const recordButton = document.getElementById("record");
-
-
 
       const displaySendMessage = (message) => {
         let messageElement = document.createElement("div");
@@ -59,7 +56,6 @@
         document.getElementById("messages").appendChild(messageElement);
         messageInput.value = "";
         messageInput.focus();
-
       };
 
       const displayResponseMessage = (message) => {
