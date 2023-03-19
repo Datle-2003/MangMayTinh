@@ -8,9 +8,9 @@ const init = () => {
 const messageInput = document.querySelector(".message-input");
 const messages = document.querySelector(".messages");
 const sendButton = document.querySelector(".send-button");
-const recordButton = document.querySelector(".record-button");
+const recordButton = document.getElementById("record");
 
-let messageHistory = "";
+
 
 const displaySendMessage = (message) => {
   let messageElement = document.createElement("div");
@@ -19,7 +19,7 @@ const displaySendMessage = (message) => {
   document.getElementById("messages").appendChild(messageElement);
   messageInput.value = "";
   messageInput.focus();
-  messageHistory = messageHistory + "Human: " + message + "\n";
+
 };
 
 const displayResponseMessage = (message) => {
@@ -29,7 +29,6 @@ const displayResponseMessage = (message) => {
   document.getElementById("messages").appendChild(messageElement);
   messageInput.value = "";
   messageInput.focus();
-  messageHistory = messageHistory + "AI: " + message + "\n";
 };
 
 async function getResponse(requireMessage) {
@@ -46,7 +45,8 @@ async function getResponse(requireMessage) {
       }),
     });
     const data = await response.json();
-    return data.response.trim();
+    console.log(data);
+    return data.bot.content.trim();
   }
 }
 
@@ -96,8 +96,6 @@ document.getElementById("send").addEventListener("click", async (e) => {
   }
 });
 
-let startButton = document.getElementById("start-button");
-
 const SpeechRecognition =
   window.speechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
@@ -108,28 +106,28 @@ recognition.lang = "vi-VN";
 
 let text = "";
 
-startButton.addEventListener("click", function () {
+recordButton.addEventListener("click", function () {
   recognition.start();
-  startButton.innerHTML =
+  recordButton.innerHTML =
     '<i class="fa fa-microphone" style="font-size:24px;color:red"></i>';
-  startButton.disabled = true;
+  recordButton.disabled = true;
 
   setTimeout(async () => {
     recognition.stop();
-    startButton.disabled = false;
-    startButton.innerHTML =
+    recordButton.disabled = false;
+    recordButton.innerHTML =
       '<i class="fa fa-microphone" style="font-size:24px"></i>';
 
     recognition.onresult = function (event) {
       const result = event.results[event.results.length - 1];
       text = result[0].transcript.trim();
+      displaySendMessage(text);
       console.log(text);
     };
 
     const response = await getResponse(text);
     if (response !== undefined) {
       displayResponseMessage(response);
-      displaySendMessage(text);
       text_to_speech(response);
     }
   }, 8000);
