@@ -38,12 +38,11 @@ app.post("/", async (req, res) => {
       model: "gpt-3.5-turbo",
       messages: messages,
     });
-    
     const botMessage = {
       role: "assistant",
-      content: completion.data.choices[0].message,
+      content: completion.data.choices[0].message.content,
     };
-    messages.push(botMessage);
+   messages.push(botMessage);
 
     const botResponse = botMessage.content; // Get the content of the bot response
 
@@ -57,3 +56,4 @@ app.post("/", async (req, res) => {
 app.listen(5000, () =>
   console.log("AI server started on http://localhost:5000")
 );
+
